@@ -1,4 +1,5 @@
 <?php
+namespace Nexmo\NexmoAccount;
 
 /**
  * Class NexmoAccount handles interaction with your Nexmo account

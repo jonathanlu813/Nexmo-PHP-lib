@@ -1,12 +1,13 @@
 <?php
+namespace Nexmo\NexmoReceipt;
 
 /**
  * Class NexmoReceipt handles and incoming message receipts sent by Nexmo
- * 
+ *
  * Usage: $var = new NexmoReceipt ();
  * Methods:
  *     exists ( )
- *     
+ *
  *
  */
 
