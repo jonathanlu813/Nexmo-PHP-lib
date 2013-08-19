@@ -70,7 +70,7 @@ class NexmoMessage {
 	 * message type. Otherwise set to TRUE if you require
 	 * unicode characters.
 	 */
-	function sendText ( $to, $from, $message, $unicode=null ) {
+	function sendText ( $to, $from, $message, $unicode=null, $status_report_req=false ) {
 
 		// Making sure strings are UTF-8 encoded
 		if ( !is_numeric($from) && !mb_check_encoding($from, 'UTF-8') ) {
@@ -101,7 +101,8 @@ class NexmoMessage {
 			'from' => $from,
 			'to' => $to,
 			'text' => $message,
-			'type' => $containsUnicode ? 'unicode' : 'text'
+			'type' => $containsUnicode ? 'unicode' : 'text',
+			'status-report-req' => $status_report_req
 		);
 		return $this->sendRequest ( $post );
 
