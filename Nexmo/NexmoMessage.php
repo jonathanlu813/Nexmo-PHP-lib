@@ -1,5 +1,5 @@
 <?php
-namespace Nexmo\NexmoMessage;
+namespace Nexmo;
 
 /**
  * Class NexmoMessage handles the methods and properties of sending an SMS message.
@@ -56,8 +56,7 @@ class NexmoMessage {
 	// A few options
 	public $ssl_verify = false; // Verify Nexmo SSL before sending any message
 
-
-	function NexmoMessage ($api_key, $api_secret) {
+	function __constructor ($api_key, $api_secret) {
 		$this->nx_key = $api_key;
 		$this->nx_secret = $api_secret;
 	}

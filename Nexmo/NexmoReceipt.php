@@ -1,5 +1,5 @@
 <?php
-namespace Nexmo\NexmoReceipt;
+namespace Nexmo;
 
 /**
  * Class NexmoReceipt handles and incoming message receipts sent by Nexmo
