@@ -1,4 +1,5 @@
 <?php
+
 namespace Nexmo;
 
 /**
@@ -16,12 +17,11 @@ namespace Nexmo;
  *
  *
  */
-
 class NexmoMessage {
 
 	// Nexmo account credentials
-	private $nx_key = '';
-	private $nx_secret = '';
+	protected $nx_key;
+	protected $nx_secret;
 
 	/**
 	 * @var string Nexmo server URI
@@ -31,19 +31,19 @@ class NexmoMessage {
 	 * This will also keep any debugging to a minimum due to
 	 * not worrying about which parser is being used.
 	 */
-	var $nx_uri = 'https://rest.nexmo.com/sms/json';
+	protected $nx_uri = 'https://rest.nexmo.com/sms/json';
 
 
 	/**
 	 * @var array The most recent parsed Nexmo response.
 	 */
-	private $nexmo_response = '';
+	protected $nexmo_response = '';
 
 
 	/**
 	 * @var bool If recieved an inbound message
 	 */
-	var $inbound_message = false;
+	protected $inbound_message = false;
 
 
 	// Current message
@@ -56,7 +56,8 @@ class NexmoMessage {
 	// A few options
 	public $ssl_verify = false; // Verify Nexmo SSL before sending any message
 
-	function __constructor ($api_key, $api_secret) {
+	public function __construct($api_key, $api_secret)
+	{
 		$this->nx_key = $api_key;
 		$this->nx_secret = $api_secret;
 	}
@@ -70,7 +71,7 @@ class NexmoMessage {
 	 * message type. Otherwise set to TRUE if you require
 	 * unicode characters.
 	 */
-	function sendText ( $to, $from, $message, $unicode=null, $status_report_req=false ) {
+	public function sendText ( $to, $from, $message, $unicode=null, $status_report_req=0 ) {
 
 		// Making sure strings are UTF-8 encoded
 		if ( !is_numeric($from) && !mb_check_encoding($from, 'UTF-8') ) {
@@ -102,7 +103,7 @@ class NexmoMessage {
 			'to' => $to,
 			'text' => $message,
 			'type' => $containsUnicode ? 'unicode' : 'text',
-			'status-report-req' => $status_report_req
+			'status-report-req' => $status_report_req,
 		);
 		return $this->sendRequest ( $post );
 
@@ -112,7 +113,7 @@ class NexmoMessage {
 	/**
 	 * Prepare new WAP message.
 	 */
-	function sendBinary ( $to, $from, $body, $udh ) {
+	public function sendBinary ( $to, $from, $body, $udh ) {
 
 		//Binary messages must be hex encoded
 		$body = bin2hex ( $body );
@@ -137,7 +138,7 @@ class NexmoMessage {
 	/**
 	 * Prepare new binary message.
 	 */
-	function pushWap ( $to, $from, $title, $url, $validity = 172800000 ) {
+	public function pushWap ( $to, $from, $title, $url, $validity = 172800000 ) {
 
 		// Making sure $title and $url are UTF-8 encoded
 		if ( !mb_check_encoding($title, 'UTF-8') || !mb_check_encoding($url, 'UTF-8') ) {
